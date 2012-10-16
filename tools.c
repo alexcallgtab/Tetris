@@ -4,6 +4,8 @@
 #include <stdarg.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <sys/types.h>
 #include "base.h"
 
 
@@ -18,6 +20,7 @@ int	id_put(int c)
 
 int	init_env(t_env* env)
 {
+	struct termios tmp;
 	char*	termtype = getenv("TERM");
 	int	success;
 
@@ -29,6 +32,11 @@ int	init_env(t_env* env)
 	env->cm = tgetstr("cm", 0);
 	env->cl = tgetstr("cl", 0);
 	tputs(tgetstr("vi", 0), 1, id_put);
+	tcgetattr(0, &tmp);
+	tmp.c_lflag = (tmp.c_lflag | ICANON) ^ ICANON;
+	tmp.c_lflag = (tmp.c_lflag | ECHO) ^ ECHO;
+	tcsetattr(0, TCSANOW, &tmp);
+	
 	return 0;
 }
 
@@ -71,4 +79,37 @@ void	resize_env(t_env* env)
 	env->h = w.ws_row;
 	init_cadre(env);;
 	}
+}
+
+char	check_touch(t_env*	env)
+{
+	char c;
+	fd_set fdread;
+	struct timeval timeout;
+	int	retselect;
+
+	FD_ZERO(&fdread);
+	FD_SET(0,&fdread);
+
+	timeout.tv_sec = 2;
+	timeout.tv_usec = 0;
+
+	retselect = select(1, &fdread, 0 , 0, &timeout);
+	if (retselect)
+	{
+		read(0, &c,1);
+		tputs(tgoto(env->cm, 0, 0), 1, id_put);
+		id_print_str("               ");
+		id_print_str("TOUCHE DETECTER");
+		write(1, &c,1);
+	}
+	else
+	{
+		c = '0';
+		tputs(tgoto(env->cm, 0, 0), 1, id_put);
+		id_print_str("               ");
+		id_print_str("NON  DETECTER");
+	}
+		
+	return c;
 }

@@ -11,36 +11,24 @@
 
 int	init(t_env* env)
 {
-	
-	struct termios tmp;
-	tcgetattr(0, &tmp);
-	tmp.c_lflag = (tmp.c_lflag | ICANON) ^ ICANON;
-	tmp.c_lflag = (tmp.c_lflag | ECHO) ^ ECHO;
-	tcsetattr(0, TCSANOW, &tmp);
 	if (init_env(env))
 		return (1);
 	init_cadre(env);
+	init_pieces(env);
 	return 0;
 }
 
 int	run(t_env* env)
 {
-	char	c;
-	fd_set	fdread;
-	struct timeval	timeout;
+	char c;
 
-	FD_ZERO(&fdread);
-	FD_SET(0,&fdread);
-
-	timeout.tv_sec = 5;
-	timeout.tv_usec = 0;
-	
-	while (select(1, &fdread, 0 , 0, &timeout) >= 0)
+	while	(1)
 	{
-		read(0, &c,1);
-		write(1,"A",1);
+		c = check_touch(env);
+		if (c == 'd')
+			rotation_piece(env);
+		show_piece(env);
 	}
-
 	return 0;
 }
 
