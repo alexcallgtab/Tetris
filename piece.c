@@ -40,10 +40,8 @@ void	erase_screen_piece(t_env* env)
 void	rotation_piece(t_env* env)
 {
 	erase_screen_piece(env);
-	env->pieces.piece0.x1 = env->pieces.piece0.x;
-	env->pieces.piece0.x2 = env->pieces.piece0.x;
-	env->pieces.piece0.x3 = env->pieces.piece0.x;
-	env->pieces.piece0.y = env->pieces.piece0.y - 1;
-	env->pieces.piece0.y2 = env->pieces.piece0.y1 + 1;
-	env->pieces.piece0.y3 = env->pieces.piece0.y2 + 1;
+	if (env->pieces.piece0.rot == 0)
+		rot1(env);
+	else
+		rot0(env);
 }

@@ -46,5 +46,7 @@ void	show_piece(t_env* env);
 void	id_print_str(char* str);
 void	rotation_piece(t_env* env);
 void	erase_screen_piece(t_env* env);
+void	rot1(t_env* env);
+void	rot0(t_env* env);
 
 #endif
