@@ -2,7 +2,7 @@
 
 
 
-void	rot1(t_env* env)
+void	piece0_rot1(t_env* env)
 {
 	env->pieces.piece0.x = env->pieces.piece0.x2;
 	env->pieces.piece0.x1 = env->pieces.piece0.x2;
@@ -13,7 +13,7 @@ void	rot1(t_env* env)
 	env->pieces.piece0.rot = 1;
 }
 
-void	rot0(t_env* env)
+void	piece0_rot0(t_env* env)
 {
 	env->pieces.piece0.x = env->pieces.piece0.x2 - 2;
 	env->pieces.piece0.x1 = env->pieces.piece0.x2 - 1;

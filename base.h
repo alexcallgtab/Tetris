@@ -35,6 +35,7 @@ typedef struct	s_env
 	t_pieces	pieces;
 }	t_env;
 
+void	init_piece1(t_env* env);
 void	init_piece0(t_env* env);
 void	init_pieces(t_env* env);
 char	check_touch(t_env* env);
@@ -46,7 +47,11 @@ void	show_piece(t_env* env);
 void	id_print_str(char* str);
 void	rotation_piece(t_env* env);
 void	erase_screen_piece(t_env* env);
-void	rot1(t_env* env);
-void	rot0(t_env* env);
+void	piece0_rot1(t_env* env);
+void	piece0_rot0(t_env* env);
+void	piece1_rot1(t_env* env);
+void	piece1_rot2(t_env* env);
+void	piece1_rot3(t_env* env);
+void	piece1_rot4(t_env* env);
 
 #endif
