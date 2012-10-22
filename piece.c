@@ -29,12 +29,6 @@ void	erase_screen_piece(t_env* env)
 void	rotation_piece(t_env* env)
 {
 	erase_screen_piece(env);
-	if (env->piece.rot == 0)
-		piece1_rot1(env);
-	else if (env->pieces.piece1.rot == 1)
-		piece1_rot2(env);
-	else if (env->pieces.piece1.rot == 2)
-		piece1_rot3(env);
-	else if (env->pieces.piece1.rot == 3)
-		piece1_rot4(env);
+
+	
 }
