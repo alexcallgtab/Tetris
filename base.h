@@ -1,7 +1,6 @@
 #ifndef _base_h_
 #define _base_h
 
-typedef struct	s_env;
 
 typedef struct	s_piece
 {
