@@ -1,50 +1,50 @@
 #include "base.h"
 
 
-void	piece1_rot1(t_env* env)
+void	piece1_rot1(struct s_piece* piece)
 {
-	env->piece.x = env->piece.x2 - 1;
-	env->piece.x1 = env->piece.x2;
-	env->piece.x3 = env->piece.x2;
-	env->piece.y = env->piece.y2;
-	env->piece.y1 = env->piece.y2 + 1;
-	env->piece.y3 = env->piece.y2 - 1;
-	env->piece.rot = 1;
+	piece->x = piece->x2 - 1;
+	piece->x1 = piece->x2;
+	piece->x3 = piece->x2;
+	piece->y = piece->y2;
+	piece->y1 = piece->y2 + 1;
+	piece->y3 = piece->y2 - 1;
+	piece->rot = 1;
 }
 
 
-void	piece1_rot2(t_env* env)
+void	piece1_rot2(struct s_piece* piece)
 {
-	env->piece.x = env->piece.x2;
-	env->piece.x1 = env->piece.x2 + 1;
-	env->piece.x3 = env->piece.x2 - 1;
-	env->piece.y = env->piece.y2 - 1;
-	env->piece.y1 = env->piece.y2;
-	env->piece.y3 = env->piece.y2;
-	env->pieces.piece1.rot = 2;
+	piece->x = piece->x2;
+	piece->x1 = piece->x2 + 1;
+	piece->x3 = piece->x2 - 1;
+	piece->y = piece->y2 - 1;
+	piece->y1 = piece->y2;
+	piece->y3 = piece->y2;
+	piece->rot = 2;
 }
 
 
 
-void	piece1_rot3(t_env* env)
+void	piece1_rot3(struct s_piece* piece)
 {
-	env->pieces.piece1.x = env->pieces.piece0.x2 + 1;
-	env->pieces.piece1.x1 = env->pieces.piece0.x2;
-	env->pieces.piece1.x3 = env->pieces.piece0.x2;
-	env->pieces.piece1.y = env->pieces.piece0.y2;
-	env->pieces.piece1.y1 = env->pieces.piece0.y2 + 1;
-	env->pieces.piece1.y3 = env->pieces.piece0.y2 - 1;
-	env->pieces.piece1.rot = 3;
+	piece->x = piece->x2 + 1;
+	piece->x1 = piece->x2;
+	piece->x3 = piece->x2;
+	piece->y = piece->y2;
+	piece->y1 = piece->y2 + 1;
+	piece->y3 = piece->y2 - 1;
+	piece->rot = 3;
 }
 
 
-void	piece1_rot4(t_env* env)
+void	piece1_rot4(struct s_piece* piece)
 {
-	env->pieces.piece1.x = env->pieces.piece0.x2 + 1;
-	env->pieces.piece1.x1 = env->pieces.piece0.x2 - 1;
-	env->pieces.piece1.x3 = env->pieces.piece0.x2;
-	env->pieces.piece1.y = env->pieces.piece0.y2;
-	env->pieces.piece1.y1 = env->pieces.piece0.y2;
-	env->pieces.piece1.y3 = env->pieces.piece0.y2 + 1;
-	env->pieces.piece1.rot = 0;
+	piece->x = piece->x2 + 1;
+	piece->x1 = piece->x2 - 1;
+	piece->x3 = piece->x2;
+	piece->y = piece->y2;
+	piece->y1 = piece->y2;
+	piece->y3 = piece->y2 + 1;
+	piece->rot = 0;
 }

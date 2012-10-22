@@ -14,7 +14,10 @@ typedef struct	s_piece
 	int	y3;
 	int	rot;
 	int	piece;
-	void	(*rot1)(t_env *);
+	void	(*rot1)(struct s_piece*);
+	void	(*rot2)(struct s_piece*);
+	void	(*rot3)(struct s_piece*);
+	void	(*rot4)(struct s_piece*);
 }	t_piece;
 
 
@@ -40,11 +43,11 @@ void	show_piece(t_env* env);
 void	id_print_str(char* str);
 void	rotation_piece(t_env* env);
 void	erase_screen_piece(t_env* env);
-void	piece0_rot1(t_env* env);
-void	piece0_rot0(t_env* env);
-void	piece1_rot1(t_env* env);
-void	piece1_rot2(t_env* env);
-void	piece1_rot3(t_env* env);
-void	piece1_rot4(t_env* env);
+void	piece0_rot1(struct s_piece*);
+void	piece0_rot2(struct s_piece*);
+void	piece1_rot1(struct s_piece*);
+void	piece1_rot2(struct s_piece*);
+void	piece1_rot3(struct s_piece*);
+void	piece1_rot4(struct s_piece*);
 
 #endif
