@@ -1,6 +1,8 @@
 #ifndef _base_h_
 #define _base_h
 
+typedef struct	s_env;
+
 typedef struct	s_piece
 {
 	int	x;
@@ -12,19 +14,10 @@ typedef struct	s_piece
 	int	x3;
 	int	y3;
 	int	rot;
+	int	piece;
+	void	(*rot1)(t_env *);
 }	t_piece;
 
-
-typedef struct	s_pieces
-{
-	t_piece	piece0;
-	t_piece	piece1;
-	t_piece	piece2;
-	t_piece	piece3;
-	t_piece	piece4;
-	t_piece	piece5;
-	t_piece	piece6;
-}	t_pieces;
 
 typedef struct	s_env
 {
@@ -32,7 +25,8 @@ typedef struct	s_env
 	int	h;
 	char*	cm;
 	char*	cl;
-	t_pieces	pieces;
+	int	piece_active;
+	t_piece	piece;
 }	t_env;
 
 void	init_piece1(t_env* env);

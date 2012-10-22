@@ -14,7 +14,6 @@ int	init(t_env* env)
 	if (init_env(env))
 		return (1);
 	init_cadre(env);
-	init_pieces(env);
 	return 0;
 }
 
