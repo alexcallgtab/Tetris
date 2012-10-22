@@ -20,7 +20,7 @@ int	init(t_env* env)
 int	run(t_env* env)
 {
 	char c;
-
+	init_piece0(env);
 	while	(1)
 	{
 		c = check_touch(env);
