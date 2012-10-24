@@ -20,17 +20,13 @@ int	init(t_env* env)
 int	run(t_env* env)
 {
 	char c;
-<<<<<<< HEAD
 	init_piece1(env);
-=======
-	init_piece0(env);
->>>>>>> b64148b5c557ebe708307137434347b038805cd3
 	while	(1)
 	{
 		c = check_touch(env);
-		if (c == 'd')
-			rotation_piece(env);
+		action_touch(env,c);
 		show_piece(env);
+		check_colli(env);
 	}
 	return 0;
 }

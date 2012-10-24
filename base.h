@@ -1,6 +1,12 @@
 #ifndef _base_h_
 #define _base_h
 
+typedef struct	s_wall
+{
+	int	x;
+	int	y;
+	struct s_wall	*next;
+}	t_wall;
 
 typedef struct	s_piece
 {
@@ -28,7 +34,9 @@ typedef struct	s_env
 	char*	cm;
 	char*	cl;
 	int	piece_active;
+	int	numb_wall;
 	t_piece	piece;
+	t_wall	wall;
 }	t_env;
 
 void	init_piece1(t_env* env);
@@ -49,5 +57,8 @@ void	piece1_rot1(struct s_piece*);
 void	piece1_rot2(struct s_piece*);
 void	piece1_rot3(struct s_piece*);
 void	piece1_rot4(struct s_piece*);
+void	action_touch(t_env* env, char c);
+void	down_piece(t_env* env);
+void	check_colli(t_env* env);
 
 #endif

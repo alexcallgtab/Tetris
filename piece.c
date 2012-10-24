@@ -40,3 +40,12 @@ void	rotation_piece(t_env* env)
 	
 	
 }
+
+void	down_piece(t_env* env)
+{
+	erase_screen_piece(env);
+	env->piece.y = env->piece.y + 1;
+	env->piece.y1 = env->piece.y1 + 1;
+	env->piece.y2 = env->piece.y2 + 1;
+	env->piece.y3 = env->piece.y3 + 1;
+}

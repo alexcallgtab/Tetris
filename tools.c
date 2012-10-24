@@ -36,7 +36,7 @@ int	init_env(t_env* env)
 	tmp.c_lflag = (tmp.c_lflag | ICANON) ^ ICANON;
 	tmp.c_lflag = (tmp.c_lflag | ECHO) ^ ECHO;
 	tcsetattr(0, TCSANOW, &tmp);
-	
+	env->numb_wall = 0;
 	return 0;
 }
 
@@ -98,17 +98,11 @@ char	check_touch(t_env*	env)
 	if (retselect)
 	{
 		read(0, &c,1);
-		tputs(tgoto(env->cm, 0, 0), 1, id_put);
-		id_print_str("               ");
-		id_print_str("TOUCHE DETECTER");
-		write(1, &c,1);
 	}
 	else
 	{
 		c = '0';
-		tputs(tgoto(env->cm, 0, 0), 1, id_put);
-		id_print_str("               ");
-		id_print_str("NON  DETECTER");
+		down_piece(env);
 	}
 		
 	return c;
