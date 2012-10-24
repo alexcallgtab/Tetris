@@ -60,5 +60,6 @@ void	piece1_rot4(struct s_piece*);
 void	action_touch(t_env* env, char c);
 void	down_piece(t_env* env);
 void	check_colli(t_env* env);
+void	check_wall_full(t_env* env);
 
 #endif

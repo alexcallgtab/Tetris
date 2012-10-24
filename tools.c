@@ -32,6 +32,7 @@ int	init_env(t_env* env)
 	env->cm = tgetstr("cm", 0);
 	env->cl = tgetstr("cl", 0);
 	tputs(tgetstr("vi", 0), 1, id_put);
+	tputs(tgetstr("bl", 0), 1, id_put);
 	tcgetattr(0, &tmp);
 	tmp.c_lflag = (tmp.c_lflag | ICANON) ^ ICANON;
 	tmp.c_lflag = (tmp.c_lflag | ECHO) ^ ECHO;

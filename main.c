@@ -27,6 +27,8 @@ int	run(t_env* env)
 		action_touch(env,c);
 		show_piece(env);
 		check_colli(env);
+		if (env->numb_wall > 0)
+			check_wall_full(env);
 	}
 	return 0;
 }
