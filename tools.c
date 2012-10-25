@@ -41,6 +41,27 @@ int	init_env(t_env* env)
 	return 0;
 }
 
+void	init_cadre_score(t_env* env)
+{
+	int	x;
+
+	x = 12;
+	while (x < 28)
+	{
+		tputs(tgoto(env->cm, x, 0), 1, id_put);
+		write(1, "#", 1);
+		tputs(tgoto(env->cm, x, 7), 1, id_put);
+		write(1, "#", 1);
+		tputs(tgoto(env->cm, x, 14), 1, id_put);
+		write(1, "#", 1);
+		x = x + 1;
+	}
+	tputs(tgoto(env->cm, 14, 2), 1, id_put);
+	id_print_str("Score : ");
+	tputs(tgoto(env->cm, 14, 9), 1, id_put);
+	id_print_str("Next piece : ");
+}
+
 void	init_cadre(t_env* env)
 {
 	int	x;
@@ -48,23 +69,26 @@ void	init_cadre(t_env* env)
 
 	tputs(env->cl, 1, id_put);
 	x = 0;
-	while (x < env->w)
+	while (x < 11)
 	{
-		tputs(tgoto(env->cm, x, 4), 1, id_put);
-		write(1, ".", 1);
-		tputs(tgoto(env->cm, x, env->h - 1), 1, id_put);
-		write(1, ".", 1);
+		tputs(tgoto(env->cm, x, 0), 1, id_put);
+		write(1, "#", 1);
+		tputs(tgoto(env->cm, x, 14), 1, id_put);
+		write(1, "#", 1);
 		x = x + 1;
 	}
-	y = 5;
-	while (y < env->h - 1)
+	y = 0;
+	while (y < 15)
 	{
 		tputs(tgoto(env->cm, 0, y), 1, id_put);
 		write(1, "#", 1);
-		tputs(tgoto(env->cm, env->w, y), 1, id_put);
+		tputs(tgoto(env->cm, 11, y), 1, id_put);
+		write(1, "#", 1);
+		tputs(tgoto(env->cm, 28, y), 1, id_put);
 		write(1, "#", 1);
 		y = y + 1;
 	}
+	init_cadre_score(env);
 }
 
 
