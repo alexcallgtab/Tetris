@@ -6,11 +6,11 @@ int	piece_wall(t_env* env, t_wall *walls)
 {
 	if (env->piece.x == walls->x && env->piece.y + 1 == walls->y)
 		return 1;
-	if (env->piece.x1 == walls->x && env->piece.y1 + 1 == walls->y)
+	else if (env->piece.x1 == walls->x && env->piece.y1 + 1 == walls->y)
 		return 1;
-	if (env->piece.x2 == walls->x && env->piece.y2 + 1 == walls->y)
+	else if (env->piece.x2 == walls->x && env->piece.y2 + 1 == walls->y)
 		return 1;
-	if (env->piece.x3 == walls->x && env->piece.y3 + 1 == walls->y)
+	else if (env->piece.x3 == walls->x && env->piece.y3 + 1 == walls->y)
 		return 1;
 	return 0;
 }
@@ -43,8 +43,7 @@ void	save_piece_wall(t_env* env)
 	walls->y = env->piece.y3;
 	walls->next = 0;
 	env->numb_wall = env->numb_wall + 1;
-	init_piece1(env);
-
+	env->piece_active = 0;
 }
 
 void	check_colli(t_env* env)
@@ -52,8 +51,8 @@ void	check_colli(t_env* env)
 	t_wall	*walls;
 
 	walls = &env->wall;
-	if (env->piece.y == env->h -1 || env->piece.y1 == env->h -1 || env->piece.y2 == env->h -1 ||
-	    env->piece.y3 == env->h -1)
+	if (env->piece.y == env->h -2 || env->piece.y1 == env->h -2 || env->piece.y2 == env->h -2 ||
+	    env->piece.y3 == env->h -2)
 		save_piece_wall(env);
 	else
 	{
@@ -61,7 +60,11 @@ void	check_colli(t_env* env)
 		while (walls != 0)
 		{
 			if (piece_wall(env, walls))
+			{
 				save_piece_wall(env);
+				break;
+				//id_print_str("BUG");
+			}
 			walls = walls->next;
 		}
 	}

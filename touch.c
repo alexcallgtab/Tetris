@@ -32,9 +32,9 @@ void	move_down(t_env* env)
 
 void	action_touch(t_env* env, char c)
 {
-	if (c == 'd')
+	if (c == 'd' && env->piece.x < env->w - 1 && env->piece.x1 < env->w - 1 && env->piece.x2 < env->w - 1 && env->piece.x3 < env->w - 1)
 		move_right(env);
-	if (c == 'a')
+	if (c == 'a' && env->piece.x > 1 && env->piece.x1 > 1 && env->piece.x2 > 1 && env->piece.x3 > 1)
 		move_left(env);
 	if (c == 'w')
 		rotation_piece(env);

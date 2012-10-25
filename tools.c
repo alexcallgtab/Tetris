@@ -27,7 +27,7 @@ int	init_env(t_env* env)
 	success = tgetent(0, termtype);
 	if (success == 0)
 		return 0;
-	env->w = tgetnum("co");
+	env->w = tgetnum("co") / 3;
 	env->h = tgetnum("li");
 	env->cm = tgetstr("cm", 0);
 	env->cl = tgetstr("cl", 0);
@@ -36,6 +36,7 @@ int	init_env(t_env* env)
 	tcgetattr(0, &tmp);
 	tmp.c_lflag = (tmp.c_lflag | ICANON) ^ ICANON;
 	tmp.c_lflag = (tmp.c_lflag | ECHO) ^ ECHO;
+	tmp.c_cflag |= CS8;
 	tcsetattr(0, TCSANOW, &tmp);
 	env->numb_wall = 0;
 	return 0;
@@ -48,38 +49,32 @@ void	init_cadre(t_env* env)
 
 	tputs(env->cl, 1, id_put);
 	x = 0;
-	while (x < env->w)
+	while (x <= env->w)
 	{
 		tputs(tgoto(env->cm, x, 4), 1, id_put);
-		write(1, ".", 1);
-		tputs(tgoto(env->cm, x, env->h - 1), 1, id_put);
-		write(1, ".", 1);
+		id_print_str("\033[01;41m ");
+		tputs(tgoto(env->cm, x, env->h), 1, id_put);
+		id_print_str("\033[01;41m ");
 		x = x + 1;
 	}
 	y = 5;
-	while (y < env->h - 1)
+	while (y < env->h)
 	{
 		tputs(tgoto(env->cm, 0, y), 1, id_put);
-		write(1, "#", 1);
+		id_print_str("\033[01;41m ");
 		tputs(tgoto(env->cm, env->w, y), 1, id_put);
-		write(1, "#", 1);
+		id_print_str("\033[01;41m ");
 		y = y + 1;
 	}
 }
 
 
 
-void	resize_env(t_env* env)
+void	resize_env(int	i)
 {
 	struct	winsize w;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
-	if (env->w != w.ws_col || env->h != w.ws_row)
-	{
-	env->w = w.ws_col;
-	env->h = w.ws_row;
-	init_cadre(env);;
-	}
 }
 
 char	check_touch(t_env*	env)
@@ -92,8 +87,8 @@ char	check_touch(t_env*	env)
 	FD_ZERO(&fdread);
 	FD_SET(0,&fdread);
 
-	timeout.tv_sec = 2;
-	timeout.tv_usec = 0;
+	timeout.tv_sec = 0;
+	timeout.tv_usec = 300000;
 
 	retselect = select(1, &fdread, 0 , 0, &timeout);
 	if (retselect)

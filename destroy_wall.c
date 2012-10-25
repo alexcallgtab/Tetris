@@ -17,7 +17,19 @@ void	clear_wall(t_env* env, int y)
 		}
 		walls = walls->next;
 	}
-	
+	walls = &env->wall;
+	while (walls != 0)
+	{
+		if (walls->y < y && walls->y != 0)
+		{
+			tputs(tgoto(env->cm, walls->x, walls->y), 1, id_put);
+			id_print_str("\033[01;40m ");
+			walls->y = walls->y + 1;
+			tputs(tgoto(env->cm, walls->x, walls->y), 1, id_put);
+			id_print_str("\033[01;46m#");
+		}
+		walls = walls->next;
+	}
 }
 
 int	check_wall_x(t_env *env, int y)
@@ -30,6 +42,7 @@ int	check_wall_x(t_env *env, int y)
 	x = 1;
 	while (x != env->w - 1)
 	{
+		status = 0;
 		walls = &env->wall;
 		while (walls != 0)
 		{

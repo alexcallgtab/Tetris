@@ -1,6 +1,24 @@
 #include "base.h"
 #include <stdlib.h>
+#include <time.h>
 
+
+void	generate_piece(t_env* env)
+{
+	int	numb;
+
+	srand(time(0));
+	numb = (rand() % 6);
+	if (numb == 0 || numb == 2 || numb == 4)
+		init_piece0(env);
+	else if (numb == 6)
+		init_piece6(env);
+	else if (numb == 5)
+		init_piece5(env);
+	else
+		init_piece1(env);
+	env->piece_active = 1;
+}
 
 void	show_piece(t_env* env)
 {

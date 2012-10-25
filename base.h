@@ -46,7 +46,7 @@ char	check_touch(t_env* env);
 int	id_put(int c);
 int	init_env(t_env* env);
 void	init_cadre(t_env* env);
-void    resize_env(t_env* env);
+void    resize_env(int i);
 void	show_piece(t_env* env);
 void	id_print_str(char* str);
 void	rotation_piece(t_env* env);
@@ -57,9 +57,12 @@ void	piece1_rot1(struct s_piece*);
 void	piece1_rot2(struct s_piece*);
 void	piece1_rot3(struct s_piece*);
 void	piece1_rot4(struct s_piece*);
+void	piece5_rot1(struct s_piece*);
+void	piece5_rot0(struct s_piece*);
 void	action_touch(t_env* env, char c);
 void	down_piece(t_env* env);
 void	check_colli(t_env* env);
 void	check_wall_full(t_env* env);
+void	generate_piece(t_env* env);
 
 #endif
