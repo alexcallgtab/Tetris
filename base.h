@@ -35,6 +35,8 @@ typedef struct	s_env
 	char*	cl;
 	int	piece_active;
 	int	numb_wall;
+	int	down;
+	int	status;
 	t_piece	piece;
 	t_wall	wall;
 }	t_env;
@@ -42,11 +44,13 @@ typedef struct	s_env
 void	init_piece1(t_env* env);
 void	init_piece0(t_env* env);
 void	init_pieces(t_env* env);
+void	init_piece6(t_env* env);
+void	init_piece5(t_env* env);
 char	check_touch(t_env* env);
 int	id_put(int c);
 int	init_env(t_env* env);
 void	init_cadre(t_env* env);
-void    resize_env(int i);
+void    resize_env(t_env* env);
 void	show_piece(t_env* env);
 void	id_print_str(char* str);
 void	rotation_piece(t_env* env);
@@ -64,5 +68,11 @@ void	down_piece(t_env* env);
 void	check_colli(t_env* env);
 void	check_wall_full(t_env* env);
 void	generate_piece(t_env* env);
+void	display_menu(t_env* env,int w, int h);
+int	run_menu(t_env* env);
+void	erreur_menu(t_env* env);
+void	error_size(t_env* env);
+void	error_resize(t_env* env);
+void	restart_level(t_env* env);
 
 #endif

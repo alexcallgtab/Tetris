@@ -14,22 +14,19 @@ int	init(t_env* env)
 {
 	if (init_env(env))
 		return (1);
-	init_cadre(env);
-	generate_piece(env);
+	env->status = 0;
 	return 0;
 }
 
 int	run(t_env* env)
 {
 	char c;
-	struct sigaction act;
 
-	act.sa_handler = resize_env;
-	sigemptyset(&act.sa_mask);
-	act.sa_flags = 0;
+	init_cadre(env);
+	generate_piece(env);
 	while	(1)
 	{
-		sigaction(SIGWINCH,&act,NULL);
+		resize_env(env);
 		if (env->piece_active == 0)
 			generate_piece(env);
 		c = check_touch(env);
@@ -47,6 +44,30 @@ int	main(void)
 	t_env	env;
 
 	init(&env);
+	if(run_menu(&env))
+		erreur_menu(&env);
 	run(&env);
 	return 0;
+}
+
+void	restart_level(t_env* env)
+{
+	t_wall	*walls;
+	t_wall	*tmp;
+
+	walls = &env->wall;
+	while (walls->next != 0)
+	{
+		tmp = walls->next;
+		walls = tmp->next;
+		if (tmp->next == 0)
+			break;
+		free(tmp->next);
+	}
+	free(env->wall.next);
+	sleep(5);
+	init(env);
+	if(run_menu(env))
+		erreur_menu(env);
+	run(env);
 }

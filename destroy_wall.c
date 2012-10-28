@@ -1,3 +1,4 @@
+#include <term.h>
 #include "base.h"
 
 
@@ -63,7 +64,6 @@ int	check_wall_x(t_env *env, int y)
 void	check_wall_full(t_env* env)
 {
 	int	y;
-	t_wall	*walls;
 
 	y = env->h;
 	while (y != 0)

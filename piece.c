@@ -1,6 +1,7 @@
-#include "base.h"
+#include <term.h>
 #include <stdlib.h>
 #include <time.h>
+#include "base.h"
 
 
 void	generate_piece(t_env* env)
@@ -55,8 +56,7 @@ void	rotation_piece(t_env* env)
 		env->piece.rot3(&env->piece);
 	else if (env->piece.rot == 3)
 		env->piece.rot4(&env->piece);
-	
-	
+	tputs(tgetstr("bl", 0), 1, id_put);
 }
 
 void	down_piece(t_env* env)
